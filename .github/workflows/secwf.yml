@@ -16,3 +16,15 @@ jobs:
               run: | 
                 echo helojkfnslfheirufnlkjfhweoriu,
                 echo fjfheroufhrelgjkrngiuerh
+    
+    build_2:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: run an one-line script build2
+              run: echo hello kjshuerhiour!
+
+    build_3:
+        runs-on: windows-latest
+        steps: 
+            - name: run an one-line script sjfbaskyfsu
+              run: echo jahsdfiuyerfjksfnuygrak
