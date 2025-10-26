@@ -1,0 +1,41 @@
+name: CI/CD pipeline practice 4.0
+run-name: deploy by @${{ github.actor }}
+on:
+    push:
+        branches: [ "main" ]
+jobs:
+    build_1:
+        strategy:
+            matrix:
+                os: [ ubuntu-latest, windows-latest, macos-lastest ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Run an one-line script on multiple os
+              run: echo hello boss build_1.0 is successfully excuted on multiple os
+    build_2:
+        needs: build_1
+        strategy:
+            matrix:
+                os: [ ubuntu-latest, windows-latest, macos-latest ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps: 
+            - uses: actions/checkout@v4
+            - name: Run an one-line script on multiple os
+              run: echo hello boss build_2.0 is successfully excuted on multiplr os
+    build_3:
+        needs: build_2
+        strategy: 
+            matrix:
+                os: [ ubunut-latest, windows-latest, macos-latest ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps: 
+            - uses: actions/checkout@v4
+            - name: Run an one-line script on multiple os
+              run: echo hello boss build_3.0 is successfully executed on multiple os
