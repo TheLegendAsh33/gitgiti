@@ -4,7 +4,7 @@ on:
     push:
         branches: [ "main" ]
 jobs:
-    build_1:
+    build:
         strategy:
             matrix:
                 os: [ ubuntu-latest, windows-latest, macos-lastest ]
@@ -16,7 +16,7 @@ jobs:
             - name: Run an one-line script on multiple os
               run: echo hello boss build_1.0 is successfully excuted on multiple os
     build_2:
-        needs: build_1
+        needs: build
         strategy:
             matrix:
                 os: [ ubuntu-latest, windows-latest, macos-latest ]
