@@ -43,4 +43,5 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: run an one-line script on multi-os
-              run: echo code runned successfully on multiple OS
+              run: |
+                echo code runned successfully on multiple OS
