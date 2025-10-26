@@ -9,6 +9,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
             - name: run an one-line script
               run: echo hello world!
 
@@ -20,18 +21,26 @@ jobs:
     build_2:
         runs-on: windows-latest
         steps: 
+            - uses: actions/checkout@v4
             - name: run an one-line script build2
               run: echo hello kjshuerhiour!
 
     build_3:
         runs-on: macos-latest
         steps: 
+            - uses: actions/checkout@v4
             - name: run an one-line script sjfbaskyfsu
               run: echo jahsdfiuyerfjksfnuygrak
     
     build_4:
         needs: [build, build_2, build_3]
-        runs-on: [ubuntu-latest, windows-latest, macos-latest]
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest, macos-latest]
+            max-parallel: 2
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
         steps:
+            - uses: actions/checkout@v4
             - name: run an one-line script on multi-os
               run: echo code runned successfully on multiple OS
