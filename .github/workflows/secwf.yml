@@ -18,13 +18,20 @@ jobs:
                 echo fjfheroufhrelgjkrngiuerh
     
     build_2:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         steps: 
             - name: run an one-line script build2
               run: echo hello kjshuerhiour!
 
     build_3:
-        runs-on: windows-latest
+        runs-on: macos-latest
         steps: 
             - name: run an one-line script sjfbaskyfsu
               run: echo jahsdfiuyerfjksfnuygrak
+    
+    build_4:
+        needs: [build, build_2, build_3]
+        runs-on: [ubuntu-latest, windows-latest, macos-latest]
+        steps:
+            - name: run an one-line script on multi-os
+              run: echo code runned successfully on multiple OS
