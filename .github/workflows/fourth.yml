@@ -1,0 +1,19 @@
+name: CI/CD fourth pipeline
+run-name: deploy by @${{ github.actor }}
+
+on:
+    push:
+        branches: [ "main" ]
+
+jobs: 
+    build: 
+        strategy:
+            matrix:
+                os: [ "macos-latest", "windows-latest", "ubuntu-latest" ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: running multiple os in one build job
+              run: echo hello boss!, CI/CD pipeline code is successfuuly executed
