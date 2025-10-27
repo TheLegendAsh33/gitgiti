@@ -16,4 +16,4 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: running multiple os in one build job
-              run: echo hello boss!, CI/CD pipeline code is successfuuly executed
+              run: echo "hello boss!, CI/CD pipeline code is successfuuly executed"
