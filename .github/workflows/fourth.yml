@@ -1,5 +1,5 @@
 name: CI/CD fourth pipeline
-run-name: deploy by @${{ github.actor }}
+run-name: Deploy by @${{ github.actor }}
 
 on:
     push:
@@ -16,4 +16,4 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: running multiple os in one build job
-              run: echo "hello boss!, CI/CD pipeline code is successfuuly executed"
+              run: echo "Hello Boss!, CI/CD pipeline code is successfuuly executed!"
