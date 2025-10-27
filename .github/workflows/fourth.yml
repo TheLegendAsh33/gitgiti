@@ -1,4 +1,4 @@
-name: CI/CD fourth pipeline
+name: fourth CI/CD pipeline with multiple os build jobs
 run-name: Deploy by @${{ github.actor }}
 
 on:
@@ -6,7 +6,7 @@ on:
         branches: [ "main" ]
 
 jobs: 
-    build: 
+    build_1: 
         strategy:
             matrix:
                 os: [ "macos-latest", "windows-latest", "ubuntu-latest" ]
@@ -15,5 +15,31 @@ jobs:
         runs-on: ${{ matrix.os }}
         steps:
             - uses: actions/checkout@v4
-            - name: running multiple os in one build job
-              run: echo "Hello Boss!, CI/CD pipeline code is successfuuly executed!!"
+            - name: running multiple os in build 1.0 job
+              run: echo "Hello Boss!, build 1.0 job is successfuuly executed!!"
+    
+    build_2:
+        needs: build_1
+        strategy:
+            matrix:
+                os: [ "windows-latest", "macos-latest", "ubuntu-latest" ]
+            max-parallel: 4
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: running multiple os in build 2.0 job
+              run: echo "Hello Boss!, build 2.0 job is successfuuly executed!!"
+              
+    build_3:
+        needs: build_2
+        strategy:
+            matrix:
+                os: [ "macos-latest", "windows-latest", "ubuntu-latest" ]
+            max-parallel: 4
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps: 
+            - uses: actions/checkout@v4
+            - name: "running multiple os in build 3.0 job"
+              run: echo "Hello Boss!, build 3.0 job is successfuuly executed!!"
