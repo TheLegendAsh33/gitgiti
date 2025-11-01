@@ -1,52 +1,26 @@
-name: fifth CI/CD pipeline practice test
+name: fifth CI/CD pipeline with multiple os build jobs
 run-name: Deployment by @${{ github.actor }}
 
-on:
+on: 
     push:
         branches: [ 'main' ]
 
 jobs:
     build_1:
-        strategy:
-            matrix:
-                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+        strategy: 
+            matrix: 
+                os: ['macos-latest', 'windows-latest', 'ubuntu-latest']
             max-parallel: 3
             fail-fast: false
         runs-on: ${{ matrix.os }}
-        steps: 
+        steps:
             - uses: actions/checkout@v4
             - name: running build_1 job...
               run: echo 'build_1 job completed successfully'
-    
+        
     build_2:
         needs: build_1
-        strategy: 
-            matrix:
-                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
-            max-parallel: 3
-            fail-fast: false
-        runs-on: ${{ matrix.os }}
-        steps: 
-            - uses: actions/checkout@v4
-            - name: running build_2 job...
-              run: echo 'build_2 job completed successfully'
-    
-    build_3: 
-        needs: [ 'build_1', 'build_2' ]
-        strategy: 
-            matrix:
-                os: [ 'macos-latest', 'windows_latest', 'ubuntu-latest' ]
-            max-parallel: 3
-            fail-fast: false
-        runs-on: ${{ matrix.os }}
-        steps: 
-            - uses: actions/checkout@v4
-            - name: running build_3 job...
-              run: echo 'build_3 jon completed successfully'
-    
-    build_4:
-        needs: [ 'build_1', 'build_2', 'build_3' ]
-        strategy: 
+        strategy:
             matrix:
                 os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
             max-parallel: 3
@@ -54,6 +28,31 @@ jobs:
         runs-on: ${{ matrix.os }}
         steps:
             - uses: actions/checkout@v4
+            - name: running build_2 job...
+              run: echo 'build_2 job completed successfully'
+
+    build_3: 
+        needs: [ 'build_1', 'build_2' ]
+        strategy: 
+            matrix:
+                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps: 
+            - uses: actions/checkout@v4
+            - name: running build_3 job...
+              run: echo 'build_3 job completed successfully'
+    
+    build_4:
+        needs: [ 'build_1', 'build_2', 'build_3' ]
+        strategy:
+            matrix:
+                os: [ 'mac-latest', 'windows-latest', 'ubuntu-latest' ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
             - name: running build_4 job...
-              run: echo 'build_4 job completed successfully'
-              
+              run: echo 'build_4 jon completed successfully'
