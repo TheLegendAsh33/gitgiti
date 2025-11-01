@@ -1,0 +1,43 @@
+name: fifth CI/CD pipeline with multiple os build jobs
+run-name: Deploy by @${{ github.actor }}
+
+on:
+    push:
+        branches: [ "main" ]
+
+jobs:
+    build:
+        strategy:
+            matrix:
+                os: [ 'maco-latest', 'windows-latest', 'ubuntu-latest' ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Runs an one-line script
+              run: echo "hello boss, first build job runs successfully"
+
+    build_2:
+        strategy:
+            matrix:
+                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Runs an one-line script
+              run: echo "hello boss, second build job runs successfully"
+    
+    build_3:
+        strategy:
+            matrix:
+                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps: 
+            - uses: actions/checkout@v4
+            - name: Runs an one-line script
+              run: echo "hello boss, third build job runs successfully"
