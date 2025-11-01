@@ -9,7 +9,7 @@ jobs:
     build:
         strategy:
             matrix:
-                os: [ 'maco-latest', 'windows-latest', 'ubuntu-latest' ]
+                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
             max-parallel: 3
             fail-fast: false
         runs-on: ${{ matrix.os }}
