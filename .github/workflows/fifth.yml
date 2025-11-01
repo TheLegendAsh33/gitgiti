@@ -1,39 +1,26 @@
-name: fifth CICD pipeline practice test
-run-name: Deployment by @${{ github.actor }}
+name: fifth CI/CD pipeline yml practice test
+run-name: Deploment by @${{ github.actor }}
 
-on:
-    push: 
+on: 
+    push:
         branches: [ 'main' ]
 
 jobs:
-    build_1: 
+    build_1:
         strategy:
             matrix:
-                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latets' ]
             max-parallel: 3
             fail-fast: false
         runs-on: ${{ matrix.os }}
         steps:
             - uses: actions/checkout@v4
-            - name: running multiple os in build_1 job...
-              run: echo "hello boss, build_1 pratice test is successful"
+            - name: running build_1 job...
+              run: echo "hello boss build_1 job practice test is successful"
     
     build_2:
         needs: build_1
         strategy:
-            matrix: 
-                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
-            max-parallel: 3
-            fail-fast: false
-        runs-on: ${{ matrix.os }}
-        steps: 
-            - uses: actions/checkout@v4
-            - name: running multiple os in build_2 job..
-              run: echo "hello boss, build_2 practice test is successful"
-
-    build_3:
-        needs: [ 'build_2' ]
-        strategy: 
             matrix:
                 os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
             max-parallel: 3
@@ -41,8 +28,21 @@ jobs:
         runs-on: ${{ matrix.os }}
         steps: 
             - uses: actions/checkout@v4
-            - name: running multiple os in build_3 job...
-              run: echo "hello boss, build_3 practice test is successful"
+            - name: running build_2 job..
+              run: echo "hello boss build_2 job practice test is successful"
+    
+    build_3:
+        needs: [ 'build_1', 'build_2' ]
+        strategy:
+            matrix:
+                os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+            max-parallel: 3
+            fail-fast: false
+        runs-on: ${{ matrix.os }}
+        steps: 
+            - uses: actions/checkout@v4
+            - name: running build_3 job..
+              run: echo 'hello boss build_3 job practice test is successful'
     
     build_4:
         needs: [ 'build_1', 'build_2', 'build_3' ]
@@ -52,7 +52,7 @@ jobs:
             max-parallel: 3
             fail-fast: false
         runs-on: ${{ matrix.os }}
-        steps: 
+        steps:
             - uses: actions/checkout@v4
-            - name: running multiple os in build_4 job...
-              run: echo "hello boss, build_4 practice test is successful"
+            - name: running build_4 job..
+              run: echo 'hello boss build_4 job practice is successful'

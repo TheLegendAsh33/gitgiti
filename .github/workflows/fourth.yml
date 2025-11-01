@@ -32,7 +32,7 @@ jobs:
               run: echo "Hello Boss!, build 2.0 job is successfuuly executed!!"
               
     build_3:
-        needs: build_2
+        needs: [ 'build_1', 'build_2' ]
         strategy:
             matrix:
                 os: [ "macos-latest", "windows-latest", "ubuntu-latest" ]
